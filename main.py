@@ -18,7 +18,9 @@ Regras:
 
 async def main():
     opcoes = ClaudeAgentOptions(system_prompt=SYSTEM_PROMPT,
-                                max_budget_usd=2.0)
+                                max_budget_usd=2.0,
+                                model="claude-sonnet-4-6")
+    
     async with ClaudeSDKClient(options=opcoes) as client:
         while True:
             pergunta = input("Você: ")
