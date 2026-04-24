@@ -17,13 +17,22 @@ Regras:
 """
 
 async def main():
-    opcoes = ClaudeAgentOptions(system_prompt=SYSTEM_PROMPT)
+    opcoes = ClaudeAgentOptions(system_prompt=SYSTEM_PROMPT,
+                                max_budget_usd=2.0)
     async with ClaudeSDKClient(options=opcoes) as client:
         while True:
             pergunta = input("Você: ")
+            print()
+
+            if not pergunta:
+                print("Você precisa enviar alguma mensagem.")
+                print()
+                continue
 
             if pergunta.lower() == "sair":
                 break
+
+            print("-=" * 40)
 
             await client.query(pergunta)
 
@@ -32,6 +41,8 @@ async def main():
                     for bloco in mensagem.content:
                         if isinstance(bloco, TextBlock):
                             print(f"Professor: {bloco.text}")
+                            print()
+                            print("-=" * 40)
 
 
 asyncio.run(main())
