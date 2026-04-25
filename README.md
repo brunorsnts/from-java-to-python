@@ -2,6 +2,12 @@
 
 Agente conversacional que funciona como um professor de Python especializado em desenvolvedores Java. Você digita um conceito Python, ele explica com o equivalente em Java do lado — transferindo o conhecimento que você já tem para a nova linguagem.
 
+## Demo
+
+Acesse o agente em produção: https://from-java-to-python.onrender.com
+
+> Hospedado no plano gratuito do Render. Após 15 minutos de inatividade o serviço dorme — a primeira requisição pode demorar ~30s para responder.
+
 ## Por que esse projeto existe
 
 Tenho base sólida em Java e Spring Boot e estou aprendendo Python. Em vez de começar do zero, quis aproveitar o que já sei: cada conceito Python é explicado com a analogia Java correspondente, acelerando o aprendizado pela transferência de conhecimento.
