@@ -14,6 +14,7 @@ O projeto nasceu também como exercício prático para aprender o **Claude Agent
 |---|---|
 | Python 3.13 | Linguagem do projeto |
 | [Claude Agent SDK](https://github.com/anthropics/claude-agent-sdk-python) | SDK para criação do agente |
+| FastAPI + uvicorn | Interface web e servidor ASGI |
 | Anthropic API | Modelo de IA (Claude) |
 | pip | Gerenciamento de dependências |
 
@@ -56,13 +57,22 @@ ANTHROPIC_API_KEY=sua_chave_aqui
 Ou configure como variável de ambiente do sistema.
 
 **5. Execute o agente**
+
+Versão terminal:
 ```bash
 python main.py
 ```
 
+Versão web:
+```bash
+uvicorn app:app --reload
+```
+
+Acesse `http://127.0.0.1:8000` no browser.
+
 ## Como usar
 
-Após iniciar, o terminal fica aguardando sua pergunta:
+**Terminal:** após iniciar, o terminal fica aguardando sua pergunta:
 
 ```
 Você: Como funcionam as listas em Python?
@@ -70,6 +80,8 @@ Professor: Em Python, listas são como ArrayList do Java...
 ```
 
 Para encerrar, digite `sair`.
+
+**Web:** acesse `http://127.0.0.1:8000`, digite sua pergunta no campo e envie.
 
 ## Aprendizados
 

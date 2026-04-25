@@ -1,5 +1,4 @@
 from claude_agent_sdk import ClaudeSDKClient, AssistantMessage, TextBlock, ClaudeAgentOptions
-import asyncio
 
 SYSTEM_PROMPT = """
 Você é um professor de Python especializado em ensinar desenvolvedores Java.
@@ -16,35 +15,24 @@ Regras:
 - Para conceitos complexos, explique primeiro o problema que o conceito resolve antes de mostrar o código
 """
 
-async def main():
-    opcoes = ClaudeAgentOptions(system_prompt=SYSTEM_PROMPT,
-                                max_budget_usd=2.0,
-                                model="claude-sonnet-4-6")
+def criar_cliente():
+    opcoes = ClaudeAgentOptions(
+        system_prompt=SYSTEM_PROMPT,
+        max_budget_usd=2.0,
+        model="claude-sonnet-4-6"
+    )
+    return ClaudeSDKClient(options=opcoes)
     
-    async with ClaudeSDKClient(options=opcoes) as client:
-        while True:
-            pergunta = input("Você: ")
-            print()
 
-            if not pergunta:
-                print("Você precisa enviar alguma mensagem.")
-                print()
-                continue
+async def enviar_mensagem_para_agente(client, pergunta):
+    await client.query(pergunta)
 
-            if pergunta.lower() == "sair":
-                break
-
-            print("-=" * 40)
-
-            await client.query(pergunta)
-
-            async for mensagem in client.receive_response():
+    resposta = ""
+    async for mensagem in client.receive_response():
                 if isinstance(mensagem, AssistantMessage):
                     for bloco in mensagem.content:
                         if isinstance(bloco, TextBlock):
-                            print(f"Professor: {bloco.text}")
-                            print()
-                            print("-=" * 40)
+                            resposta += bloco.text
+    return resposta
+        
 
-
-asyncio.run(main())
